@@ -5,6 +5,14 @@ class Store {
     constructor(initState = {}) {
         this.state = initState;
         this.listeners = []; // Слушатели изменений состояния
+        this.initializeExistingCodes();
+    }
+
+    /**
+     * Инициализация коллекции уникальных кодов
+     */
+    initializeExistingCodes() {
+        this.existingCodes = new Set(this.state.list.map(item => item.code));
     }
 
     /**
@@ -44,9 +52,28 @@ class Store {
     addItem() {
         this.setState({
             ...this.state,
-            list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+            list: [...this.state.list, {code: this.generateUniqueNumber(), title: 'Новая запись'}]
         })
     };
+
+    /**
+     * Генерация уникального числа. Проверка наличия сгенерированного числа в {@code existingCodes},
+     * если существует - генерация нового уникального числа,
+     * если данное число отсутствует - добавление этого числа в {@code existingCodes} и возврат этого числа
+     * @return Уникальное число
+     */
+    generateUniqueNumber() {
+        const randomKey = Math.random().toString(36).slice(2);
+        const hash = this.generateHash(randomKey);
+        const uniqueNumber = Math.abs(hash % 1000);
+
+        if (this.existingCodes.has(uniqueNumber)) {
+            return this.generateUniqueNumber();
+        } else {
+            this.existingCodes.add(uniqueNumber);
+            return uniqueNumber;
+        }
+    }
 
     /**
      * Удаление записи по коду
@@ -75,6 +102,22 @@ class Store {
                 return item;
             })
         })
+    }
+
+    /**
+     * Генерация хэш кода из строки
+     * @param randomKey Рандомный строковый ключ
+     * @return Сгенерированный хэш код из строки
+     */
+    generateHash(randomKey) {
+        let hash = 0;
+
+        for (let i = 0; i < randomKey.length; i++) {
+            const char = randomKey.charCodeAt(i);
+            hash = (hash << 5) - hash + char;
+        }
+
+        return hash;
     }
 }
 
