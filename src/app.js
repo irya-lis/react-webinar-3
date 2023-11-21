@@ -35,7 +35,13 @@ function App({store}) {
 
                                 <div className='Item-title'>
                                     {item.title}
+                                    {item.numberClicks > 0 && (
+                                        <span className='Item-click'>
+                                            | Выделяли {item.numberClicks} раз(a)
+                                        </span>
+                                    )}
                                 </div>
+
 
                                 <div className='Item-actions'>
                                     <button onClick={() => store.deleteItem(item.code)}>

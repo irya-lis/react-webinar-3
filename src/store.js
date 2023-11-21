@@ -52,7 +52,7 @@ class Store {
     addItem() {
         this.setState({
             ...this.state,
-            list: [...this.state.list, {code: this.generateUniqueNumber(), title: 'Новая запись'}]
+            list: [...this.state.list, {code: this.generateUniqueNumber(), title: 'Новая запись', numberClicks: 0}]
         })
     };
 
@@ -87,7 +87,7 @@ class Store {
     };
 
     /**
-     * Выделение записи по коду
+     * Выделение записи по коду и автоинкремент счетчика кликов на данную запись
      * @param code
      */
     selectItem(code) {
@@ -96,6 +96,9 @@ class Store {
             list: this.state.list.map(item => {
                 if (item.code === code) {
                     item.selected = !item.selected;
+                    if (item.selected) {
+                        item.numberClicks += 1;
+                    }
                 } else {
                     item.selected = false;
                 }
