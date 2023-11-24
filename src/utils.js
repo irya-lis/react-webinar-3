@@ -26,3 +26,24 @@ export function createElement(name, props = {}, ...children) {
 
     return element;
 }
+
+/**
+ * Склонение слова по падежам в зависимости от числа
+ * @param value {Number} Число
+ * @param formOne {String} Первая форма склонения
+ * @param formTwo {String} Вторая форма склонения
+ * @returns {String} Склоненная форма слова
+ */
+
+export function pluralForm(value, formOne, formTwo) {
+    const mod100 = value % 100;
+    const mod10 = value % 10;
+
+    if (mod10 === 1 && mod100 !== 11) {
+        return formOne;
+    } else if ((mod10 >= 2 && mod10 <= 4) && (mod100 < 10 || mod100 >= 20)) {
+        return formTwo;
+    } else {
+        return formOne;
+    }
+}

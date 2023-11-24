@@ -1,6 +1,6 @@
 import React from 'react';
-import {createElement} from './utils.js';
 import './styles.css';
+import {pluralForm} from './utils';
 
 /**
  * Приложение
@@ -37,11 +37,10 @@ function App({store}) {
                                     {item.title}
                                     {item.numberClicks > 0 && (
                                         <span className='Item-click'>
-                                            | Выделяли {item.numberClicks} раз(a)
+                                            | Выделяли {item.numberClicks} {pluralForm(item.numberClicks, 'раз', 'раза')};
                                         </span>
                                     )}
                                 </div>
-
 
                                 <div className='Item-actions'>
                                     <button onClick={() => store.deleteItem(item.code)}>
