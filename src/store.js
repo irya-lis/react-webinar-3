@@ -1,4 +1,3 @@
-
 /**
  * Хранилище состояния приложения
  */
@@ -51,11 +50,12 @@ class Store {
       ...this.state,
       basket: updatedBasket,
     });
+
+    this.calculateTotalPrice();
   }
 
 
-
-/**
+  /**
    * Добавление товара в корзину
    * @param item {Object} Товар для добавления
    */
@@ -67,20 +67,32 @@ class Store {
     if (itemIndex === -1) {
       this.setState({
         ...this.state,
-        basket: [...basket, { ...item, quantity: 1 }]
+        basket: [...basket, {...item, quantity: 1}]
       });
     } else {
       const updatedBasket = [...basket];
-      updatedBasket[itemIndex] = { ...updatedBasket[itemIndex], quantity: updatedBasket[itemIndex].quantity + 1 };
+      updatedBasket[itemIndex] = {...updatedBasket[itemIndex], quantity: updatedBasket[itemIndex].quantity + 1};
 
       this.setState({
         ...this.state,
         basket: updatedBasket
       });
     }
+    this.calculateTotalPrice();
   }
 
 
+  /**
+   * Подсчет общей цены товаров в корзине
+   */
+  calculateTotalPrice() {
+    this.setState({
+      ...this.state,
+      totalPrice: this.state.basket.reduce((sum, el) => {
+        return sum + el.price * el.quantity;
+      }, 0),
+    });
+  }
 
 
 }

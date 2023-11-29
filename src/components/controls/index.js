@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import './style.css';
 import BasketList from "../basket-list";
-import { plural } from "../../utils";
+import {plural} from "../../utils";
 
-function Controls({ order, removeFromBasket, basket }) {
+function Controls({order, removeFromBasket, basket, totalPrice}) {
   const [isBasketShow, setIsBasketShow] = useState(false);
 
   const handleBasketShow = () => {
     setIsBasketShow(!isBasketShow);
   }
 
+
   const basketText = (count) => {
-    return `В корзине: ${count} ${plural(count, { one: 'товар', few: 'товара', many: 'товаров'  })} `;
+    return `В корзине: ${count} ${plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} `;
   }
 
   return (
     <div className='Controls'>
-
       {basket ?
-        <span>{basketText(basket.length)}</span> :
+        <span>{basketText(basket.length)} / {totalPrice} ₽ </span> :
         <span>В корзине: пусто</span>
       }
       <button onClick={handleBasketShow}>Перейти</button>
@@ -27,7 +27,8 @@ function Controls({ order, removeFromBasket, basket }) {
 
       {isBasketShow &&
       <div className='basket-show'>
-        <BasketList order={order} handleBasketShow={handleBasketShow} removeFromBasket={removeFromBasket} basket={basket} />
+        <BasketList order={order} handleBasketShow={handleBasketShow} removeFromBasket={removeFromBasket}
+                    basket={basket}/>
       </div>
       }
     </div>
@@ -39,7 +40,8 @@ Controls.propTypes = {
 };
 
 Controls.defaultProps = {
-  removeFromBasket: () => { },
+  removeFromBasket: () => {
+  },
 };
 
 export default React.memo(Controls);

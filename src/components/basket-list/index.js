@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
-import Head from "../head";
 import BasketItem from "../basket-item";
+import Head from "../head";
 
 const BasketList = (props) => {
   const {handleBasketShow, removeFromBasket, basket = []} = props;
@@ -13,7 +13,7 @@ const BasketList = (props) => {
 
   return (
     <div>
-
+      <Head title="Корзина"/>
       <ul className="Basket-list">
         {basket && basket.length ? (
           basket.map(item => (

@@ -8,6 +8,8 @@ import List from "./components/list";
 function App({store}) {
   const list = store.getState().list;
   const basket = store.getState().basket;
+  const totalPrice = store.getState().totalPrice;
+
 
   const [order, setOrder] = useState([]);
 
@@ -29,7 +31,7 @@ function App({store}) {
       <Controls
         basket={basket}
         order={order}
-        quantity={order.length}
+        totalPrice={totalPrice}
         removeFromBasket={callbacks.removeFromBasket}
 
       />
