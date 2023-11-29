@@ -7,9 +7,9 @@ import BasketItem from "../basket-item";
 const BasketList = (props) => {
   const {handleBasketShow, removeFromBasket, basket } = props;
 
-  // const totalPrice = basket.reduce((sum, el) => {
-  //   return sum + el.price * el.quantity;
-  // }, 0);
+  const totalPrice = basket.reduce((sum, el) => {
+    return sum + el.price * el.quantity;
+  }, 0);
 
   return (
     <div>
@@ -23,7 +23,7 @@ const BasketList = (props) => {
           ))
         ) : <div>Корзина пуста</div>
         }
-        {/*<div className="Basket-total-price">Итого: {totalPrice} ₽</div>*/}
+        <div className="Basket-total-price">Итого: {totalPrice} ₽</div>
         <button className="Basket-close" onClick={handleBasketShow}>
           Закрыть
         </button>
