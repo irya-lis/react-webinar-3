@@ -5,11 +5,7 @@ import BasketItem from "../basket-item";
 import Head from "../head";
 
 const BasketList = (props) => {
-  const {handleBasketShow, removeFromBasket, basket = []} = props;
-
-  const totalPrice = basket.reduce((sum, el) => {
-    return sum + el.price * el.quantity;
-  }, 0);
+  const {basket = [], totalPrice, handleBasketShow, removeFromBasket} = props;
 
   return (
     <div>

@@ -23,8 +23,6 @@ function Item(props) {
 }
 
 
-
-
 Item.propTypes = {
   item: PropTypes.shape({
     code: PropTypes.number.isRequired,

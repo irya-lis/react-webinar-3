@@ -4,7 +4,7 @@ import './style.css';
 import BasketList from "../basket-list";
 import {plural} from "../../utils";
 
-function Controls({order, removeFromBasket, basket, totalPrice}) {
+function Controls({removeFromBasket, basket, totalPrice}) {
   const [isBasketShow, setIsBasketShow] = useState(false);
 
   const handleBasketShow = () => {
@@ -27,8 +27,13 @@ function Controls({order, removeFromBasket, basket, totalPrice}) {
 
       {isBasketShow &&
       <div className='basket-show'>
-        <BasketList order={order} handleBasketShow={handleBasketShow} removeFromBasket={removeFromBasket}
-                    basket={basket}/>
+        <BasketList
+          basket={basket}
+          totalPrice={totalPrice}
+          handleBasketShow={handleBasketShow}
+          removeFromBasket={removeFromBasket}
+
+        />
       </div>
       }
     </div>
