@@ -1,4 +1,3 @@
-import {generateCode} from "./utils";
 
 /**
  * Хранилище состояния приложения
@@ -41,48 +40,53 @@ class Store {
   }
 
   /**
-   * Добавление новой записи
-   */
-  addItem() {
-    this.setState({
-      ...this.state,
-      list: [...this.state.list, {code: generateCode(), title: 'Новая запись'}]
-    })
-  };
-
-  /**
-   * Удаление записи по коду
+   * Удаление товара из корзины по коду
    * @param code
    */
-  deleteItem(code) {
-    this.setState({
-      ...this.state,
-      // Новый список, в котором не будет удаляемой записи
-      list: this.state.list.filter(item => item.code !== code)
-    })
-  };
+  removeItemFromBasket(code) {
+    const basket = this.state.basket || [];
+    const updatedBasket = basket.filter(item => item.code !== code);
 
-  /**
-   * Выделение записи по коду
-   * @param code
-   */
-  selectItem(code) {
     this.setState({
       ...this.state,
-      list: this.state.list.map(item => {
-        if (item.code === code) {
-          // Смена выделения и подсчёт
-          return {
-            ...item,
-            selected: !item.selected,
-            count: item.selected ? item.count : item.count + 1 || 1,
-          };
-        }
-        // Сброс выделения если выделена
-        return item.selected ? {...item, selected: false} : item;
-      })
-    })
+      basket: updatedBasket,
+    });
   }
+
+
+
+/**
+   * Добавление товара в корзину
+   * @param item {Object} Товар для добавления
+   */
+
+  addItemToBasket(item) {
+    const basket = this.state.basket || [];
+    const itemIndex = basket.findIndex(orderItem => orderItem.code === item.code);
+
+    if (itemIndex === -1) {
+      this.setState({
+        ...this.state,
+        basket: [...basket, { ...item, quantity: 1 }]
+      });
+    } else {
+      const updatedBasket = [...basket];
+      updatedBasket[itemIndex] = { ...updatedBasket[itemIndex], quantity: updatedBasket[itemIndex].quantity + 1 };
+
+      this.setState({
+        ...this.state,
+        basket: updatedBasket
+      });
+    }
+  }
+
+
+
+
 }
 
 export default Store;
+
+
+
+

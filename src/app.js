@@ -1,39 +1,46 @@
-import React, {useCallback} from 'react';
-import List from "./components/list";
-import Controls from "./components/controls";
-import Head from "./components/head";
+// App.js
+import React, {useCallback, useState} from "react";
 import PageLayout from "./components/page-layout";
+import Head from "./components/head";
+import Controls from "./components/controls";
+import List from "./components/list";
+import Basket from "./components/basket";
 
-/**
- * Приложение
- * @param store {Store} Хранилище состояния приложения
- * @returns {React.ReactElement}
- */
 function App({store}) {
-
   const list = store.getState().list;
+  const basket = store.getState().basket;
+
+  const [order, setOrder] = useState([]);
 
   const callbacks = {
-    onDeleteItem: useCallback((code) => {
-      store.deleteItem(code);
+    addItemToBasket: useCallback((item) => {
+      setOrder((prevOrder) => [...prevOrder, item]); // Обновляем локальное состояние
+      store.addItemToBasket(item);
     }, [store]),
 
-    onSelectItem: useCallback((code) => {
-      store.selectItem(code);
-    }, [store]),
-
-    onAddItem: useCallback(() => {
-      store.addItem();
-    }, [store])
-  }
+    removeFromBasket: useCallback((itemId) => {
+      setOrder((prevOrder) => prevOrder.filter((el) => el.code !== itemId));
+      store.removeItemFromBasket(itemId);
+    }, [store, setOrder]),
+  };
 
   return (
     <PageLayout>
-      <Head title='Приложение на чистом JS'/>
-      <Controls onAdd={callbacks.onAddItem}/>
-      <List list={list}
-            onDeleteItem={callbacks.onDeleteItem}
-            onSelectItem={callbacks.onSelectItem}/>
+      <Head title='Магазин'/>
+      <Controls
+        basket={basket}
+        order={order}
+        quantity={order.length}
+        removeFromBasket={callbacks.removeFromBasket}
+
+      />
+      <List
+        list={list}
+        addItemToBasket={callbacks.addItemToBasket}
+      />
+
+
+
     </PageLayout>
   );
 }

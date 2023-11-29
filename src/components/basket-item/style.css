@@ -1,8 +1,9 @@
-.Item {
+.Item-basket {
   display: flex;
   justify-content: flex-start;
   transition: background-color 1s;
 }
+
 
 
 .Item-code {
