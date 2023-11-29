@@ -4,7 +4,6 @@ import PageLayout from "./components/page-layout";
 import Head from "./components/head";
 import Controls from "./components/controls";
 import List from "./components/list";
-import Basket from "./components/basket";
 
 function App({store}) {
   const list = store.getState().list;
@@ -38,7 +37,6 @@ function App({store}) {
         list={list}
         addItemToBasket={callbacks.addItemToBasket}
       />
-
 
 
     </PageLayout>

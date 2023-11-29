@@ -4,7 +4,7 @@ import './style.css';
 import BasketList from "../basket-list";
 import { plural } from "../../utils";
 
-function Controls({ order, removeFromBasket, basket, quantity = 0 }) {
+function Controls({ order, removeFromBasket, basket }) {
   const [isBasketShow, setIsBasketShow] = useState(false);
 
   const handleBasketShow = () => {
@@ -12,14 +12,14 @@ function Controls({ order, removeFromBasket, basket, quantity = 0 }) {
   }
 
   const basketText = (count) => {
-    return `В корзине: ${count} ${plural(count, { one: 'товар', few: 'товара', many: 'товаров' })}`;
+    return `В корзине: ${count} ${plural(count, { one: 'товар', few: 'товара', many: 'товаров'  })} `;
   }
 
   return (
     <div className='Controls'>
 
       {basket ?
-        <span>{basketText(quantity)}</span> :
+        <span>{basketText(basket.length)}</span> :
         <span>В корзине: пусто</span>
       }
       <button onClick={handleBasketShow}>Перейти</button>

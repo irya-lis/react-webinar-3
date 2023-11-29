@@ -5,7 +5,7 @@ import Head from "../head";
 import BasketItem from "../basket-item";
 
 const BasketList = (props) => {
-  const {handleBasketShow, removeFromBasket, basket } = props;
+  const {handleBasketShow, removeFromBasket, basket = []} = props;
 
   const totalPrice = basket.reduce((sum, el) => {
     return sum + el.price * el.quantity;
@@ -19,11 +19,17 @@ const BasketList = (props) => {
           basket.map(item => (
             <BasketItem key={item.code}
                         item={item}
-                        removeFromBasket={removeFromBasket} />
+                        removeFromBasket={removeFromBasket}/>
           ))
         ) : <div>Корзина пуста</div>
         }
-        <div className="Basket-total-price">Итого: {totalPrice} ₽</div>
+
+        {
+          basket.length > 0 &&
+          <div className="Basket-total-price">Итого: {totalPrice} ₽</div>
+        }
+
+
         <button className="Basket-close" onClick={handleBasketShow}>
           Закрыть
         </button>
