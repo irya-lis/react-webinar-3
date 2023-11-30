@@ -1,39 +1,38 @@
-import React, {useCallback} from 'react';
-import List from "./components/list";
-import Controls from "./components/controls";
-import Head from "./components/head";
+import React, {useCallback} from "react";
 import PageLayout from "./components/page-layout";
+import Head from "./components/head";
+import Controls from "./components/controls";
+import List from "./components/list";
 
-/**
- * Приложение
- * @param store {Store} Хранилище состояния приложения
- * @returns {React.ReactElement}
- */
 function App({store}) {
+  const list = store.getState().list || [];
+  const basket = store.getState().basket || [];
+  const totalPrice = store.getState().totalPrice || 0;
 
-  const list = store.getState().list;
 
   const callbacks = {
-    onDeleteItem: useCallback((code) => {
-      store.deleteItem(code);
+    addItemToBasket: useCallback((item) => {
+      store.addItemToBasket(item);
     }, [store]),
 
-    onSelectItem: useCallback((code) => {
-      store.selectItem(code);
+    removeFromBasket: useCallback((itemId) => {
+      store.removeItemFromBasket(itemId);
     }, [store]),
-
-    onAddItem: useCallback(() => {
-      store.addItem();
-    }, [store])
-  }
+  };
 
   return (
     <PageLayout>
-      <Head title='Приложение на чистом JS'/>
-      <Controls onAdd={callbacks.onAddItem}/>
-      <List list={list}
-            onDeleteItem={callbacks.onDeleteItem}
-            onSelectItem={callbacks.onSelectItem}/>
+      <Head title='Магазин'/>
+      <Controls
+        basket={basket}
+        totalPrice={totalPrice}
+        addItemToBasket={callbacks.addItemToBasket}
+        removeFromBasket={callbacks.removeFromBasket}
+      />
+      <List
+        list={list}
+        addItemToBasket={callbacks.addItemToBasket}
+      />
     </PageLayout>
   );
 }

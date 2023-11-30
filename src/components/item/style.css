@@ -2,11 +2,7 @@
   display: flex;
   justify-content: flex-start;
   transition: background-color 1s;
-}
-
-.Item_selected {
-  background: #75aaf1;
-  color: #fff;
+  font-size: 16px;
 }
 
 .Item-code {
@@ -15,7 +11,25 @@
 
 .Item-title {
   width: 100%;
-  padding: 20px 10px;
+  margin: 20px 10px;
+}
+
+.Item-price {
+  width: 100%;
+  margin: 20px 10px;
+  text-align: right;
+}
+
+.Item-quantity {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin-right: 20px;
+  margin-left: 40px;
+}
+
+.Item-quantity span {
+  margin-left: 5px;
 }
 
 .Item-actions {
