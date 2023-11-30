@@ -11,6 +11,10 @@ function Controls({basket, totalPrice, addItemToBasket, removeFromBasket}) {
     setIsBasketShow(!isBasketShow);
   }
 
+  /**
+   * Отображение уникальных товаров с плюрализацией в корзине и их общей стоимости, иначе - 'пусто'
+   * @param {number} count Количество товаров
+   */
   const basketText = (count) => {
     return (
       <span>

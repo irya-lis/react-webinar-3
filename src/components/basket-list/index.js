@@ -13,22 +13,21 @@ const BasketList = ({basket = [], totalPrice, isBasketShow, handleBasketShow, ad
         Закрыть
       </button>
       <div>
-        {basket && basket.length ? (
-          basket.map(item => (
-            <div key={item.code} className='List-item'>
-              <Item
-                key={item.code}
-                item={item}
-                quantity={item.quantity}
-                isBasketShow={isBasketShow}
-                addItemToBasket={addItemToBasket}
-                removeFromBasket={removeFromBasket}
-              /></div>
-          ))
-        ) : <div className="Basket-empty">Корзина пуста</div>
-
+        {
+          basket && basket.length ? (
+            basket.map(item => (
+              <div key={item.code} className='List-item'>
+                <Item
+                  key={item.code}
+                  item={item}
+                  quantity={item.quantity}
+                  isBasketShow={isBasketShow}
+                  addItemToBasket={addItemToBasket}
+                  removeFromBasket={removeFromBasket}
+                /></div>
+            ))
+          ) : <div className="Basket-empty">Корзина пуста</div>
         }
-
         {
           basket.length > 0 &&
           <div className="Basket-total-price">

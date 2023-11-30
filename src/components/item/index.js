@@ -4,6 +4,9 @@ import './style.css';
 
 function Item({item, quantity, isBasketShow, addItemToBasket, removeFromBasket}) {
 
+  /**
+   * Добавление или удаление товара из корзины в зависимости от флага isBasketShow
+   */
   const handleActionClick = () => {
     if (isBasketShow) {
       removeFromBasket(item.code);

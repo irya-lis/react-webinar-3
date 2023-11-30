@@ -50,16 +50,13 @@ class Store {
       ...this.state,
       basket: updatedBasket,
     });
-
     this.calculateTotalPrice();
   }
 
-
   /**
-   * Добавление товара в корзину
+   * Добавление товара в корзину, если данный товар уже есть в корзине, то инкремент его количества на 1
    * @param item {Object} Товар для добавления
    */
-
   addItemToBasket(item) {
     const basket = this.state.basket || [];
     const itemIndex = basket.findIndex(orderItem => orderItem.code === item.code);
@@ -81,7 +78,6 @@ class Store {
     this.calculateTotalPrice();
   }
 
-
   /**
    * Подсчет общей цены товаров в корзине
    */
@@ -93,12 +89,6 @@ class Store {
       }, 0),
     });
   }
-
-
 }
 
 export default Store;
-
-
-
-
