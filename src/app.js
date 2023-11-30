@@ -26,6 +26,7 @@ function App({store}) {
       <Controls
         basket={basket}
         totalPrice={totalPrice}
+        addItemToBasket={callbacks.addItemToBasket}
         removeFromBasket={callbacks.removeFromBasket}
       />
       <List

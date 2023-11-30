@@ -1,35 +1,41 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
-import BasketItem from "../basket-item";
 import Head from "../head";
+import Item from "../item";
 
-const BasketList = (props) => {
-  const {basket = [], totalPrice, handleBasketShow, removeFromBasket} = props;
+const BasketList = ({basket = [], totalPrice, isBasketShow, handleBasketShow, addItemToBasket, removeFromBasket}) => {
 
   return (
-    <div>
+    <div className="Basket">
       <Head title="Корзина"/>
-      <ul className="Basket-list">
+      <button className="Basket-close" onClick={handleBasketShow}>
+        Закрыть
+      </button>
+      <div>
         {basket && basket.length ? (
           basket.map(item => (
-            <BasketItem key={item.code}
-                        item={item}
-                        removeFromBasket={removeFromBasket}/>
+            <div key={item.code} className='List-item'>
+              <Item
+                key={item.code}
+                item={item}
+                quantity={item.quantity}
+                isBasketShow={isBasketShow}
+                addItemToBasket={addItemToBasket}
+                removeFromBasket={removeFromBasket}
+              /></div>
           ))
-        ) : <div>Корзина пуста</div>
+        ) : <div className="Basket-empty">Корзина пуста</div>
+
         }
 
         {
           basket.length > 0 &&
-          <div className="Basket-total-price">Итого: {totalPrice} ₽</div>
+          <div className="Basket-total-price">
+            Итого <span>{totalPrice} ₽</span>
+          </div>
         }
-
-
-        <button className="Basket-close" onClick={handleBasketShow}>
-          Закрыть
-        </button>
-      </ul>
+      </div>
     </div>
   );
 }

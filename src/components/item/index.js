@@ -2,26 +2,32 @@ import React from "react";
 import PropTypes from "prop-types";
 import './style.css';
 
-function Item(props) {
+function Item({item, quantity, isBasketShow, addItemToBasket, removeFromBasket}) {
 
-  const { item, addItemToBasket } = props;
-
-  const handleAddToBasket = () => {
-    addItemToBasket(item);
+  const handleActionClick = () => {
+    if (isBasketShow) {
+      removeFromBasket(item.code);
+    } else {
+      addItemToBasket(item);
+    }
   };
 
   return (
     <div className='Item'>
-      <div className='Item-code'>{props.item.code}</div>
-      <div className='Item-title'>{props.item.title}</div>
-      <div className='Item-price'>{props.item.price} ₽</div>
+      <div className='Item-code'>{item.code}</div>
+      <div className='Item-title'>{item.title}</div>
+      <div className='Item-price'>{item.price} ₽</div>
+      {isBasketShow &&
+      <div className='Item-quantity'>{quantity} <span>шт</span></div>
+      }
       <div className='Item-actions'>
-        <button onClick={handleAddToBasket}>Добавить</button>
+        <button onClick={handleActionClick}>
+          {isBasketShow ? "Удалить" : "Добавить"}
+        </button>
       </div>
     </div>
   );
 }
-
 
 Item.propTypes = {
   item: PropTypes.shape({
@@ -29,11 +35,15 @@ Item.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
-  addItemToBasket: PropTypes.func,
+  addItemToBasket: PropTypes.func.isRequired,
+  quantity: PropTypes.number,
+  isBasketItem: PropTypes.bool,
+  removeFromBasket: PropTypes.func,
 };
 
 Item.defaultProps = {
-  addItemToBasket: () => {},
+  isBasketItem: false,
+  removeFromBasket: PropTypes.func.isRequired,
 };
 
 export default React.memo(Item);

@@ -6,6 +6,10 @@ body {
 }
 
 .PageLayout {
+  width: 1024px;
+  height: 1024px;
+  left: 208px;
+
   max-width: 1024px;
   min-height: 100vh;
   margin: 0 auto;

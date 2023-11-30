@@ -4,35 +4,42 @@ import './style.css';
 import BasketList from "../basket-list";
 import {plural} from "../../utils";
 
-function Controls({removeFromBasket, basket, totalPrice}) {
+function Controls({basket, totalPrice, addItemToBasket, removeFromBasket}) {
   const [isBasketShow, setIsBasketShow] = useState(false);
 
   const handleBasketShow = () => {
     setIsBasketShow(!isBasketShow);
   }
 
-
   const basketText = (count) => {
-    return `В корзине: ${count} ${plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} `;
+    return (
+      <span>
+        <p className="Basket-text">В корзине: </p>
+        {count > 0 ? `${count} ${plural(count, {
+        one: 'товар',
+        few: 'товара',
+        many: 'товаров'
+      })} / ${totalPrice} ₽` : 'пусто'}
+    </span>
+    );
   }
 
   return (
     <div className='Controls'>
-      {basket ?
-        <span>{basketText(basket.length)} / {totalPrice} ₽ </span> :
-        <span>В корзине: пусто</span>
-      }
+    <span className="Controls-basket">
+      <span >{basketText(basket?.length)}</span>
+    </span>
       <button onClick={handleBasketShow}>Перейти</button>
 
-
       {isBasketShow &&
-      <div className='basket-show'>
+      <div className='Basket-show'>
         <BasketList
           basket={basket}
           totalPrice={totalPrice}
+          isBasketShow={isBasketShow}
           handleBasketShow={handleBasketShow}
+          addItemToBasket={addItemToBasket}
           removeFromBasket={removeFromBasket}
-
         />
       </div>
       }
@@ -41,12 +48,17 @@ function Controls({removeFromBasket, basket, totalPrice}) {
 }
 
 Controls.propTypes = {
+  basket: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      quantity: PropTypes.number.isRequired,
+    })
+  ),
+  totalPrice: PropTypes.number.isRequired,
+  addItemToBasket: PropTypes.func.isRequired,
   removeFromBasket: PropTypes.func,
-};
-
-Controls.defaultProps = {
-  removeFromBasket: () => {
-  },
 };
 
 export default React.memo(Controls);

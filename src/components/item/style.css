@@ -2,8 +2,9 @@
   display: flex;
   justify-content: flex-start;
   transition: background-color 1s;
-}
+  font-size: 16px;
 
+}
 
 .Item-code {
   padding: 20px 10px 20px 20px;
@@ -11,22 +12,27 @@
 
 .Item-title {
   width: 100%;
-  padding: 20px 10px;
+  margin: 20px 10px;
 }
-
 
 .Item-price {
   width: 100%;
-  padding: 20px 10px;
+  margin: 20px 10px;
   text-align: right;
 }
 
-/*button {*/
-/*  width: 76px;*/
-/*  height: 21px;*/
-/*  border-radius: 2px;*/
+.Item-quantity {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin-right: 20px;
+  margin-left: 40px;
 
-/*}*/
+}
+
+.Item-quantity span {
+  margin-left: 5px;
+}
 
 .Item-actions {
   display: flex;
