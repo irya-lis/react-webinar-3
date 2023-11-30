@@ -16,10 +16,10 @@ function Controls({basket, totalPrice, addItemToBasket, removeFromBasket}) {
       <span>
         <p className="Basket-text">В корзине: </p>
         {count > 0 ? `${count} ${plural(count, {
-        one: 'товар',
-        few: 'товара',
-        many: 'товаров'
-      })} / ${totalPrice} ₽` : 'пусто'}
+          one: 'товар',
+          few: 'товара',
+          many: 'товаров'
+        })} / ${totalPrice} ₽` : 'пусто'}
     </span>
     );
   }
@@ -27,22 +27,25 @@ function Controls({basket, totalPrice, addItemToBasket, removeFromBasket}) {
   return (
     <div className='Controls'>
     <span className="Controls-basket">
-      <span >{basketText(basket?.length)}</span>
+      <span>{basketText(basket?.length)}</span>
     </span>
       <button onClick={handleBasketShow}>Перейти</button>
 
-      {isBasketShow &&
-      <div className='Basket-show'>
-        <BasketList
-          basket={basket}
-          totalPrice={totalPrice}
-          isBasketShow={isBasketShow}
-          handleBasketShow={handleBasketShow}
-          addItemToBasket={addItemToBasket}
-          removeFromBasket={removeFromBasket}
-        />
-      </div>
-      }
+      {isBasketShow && (
+        <>
+          <div className="Basket-overlay" onClick={handleBasketShow}/>
+          <div className="Basket-show">
+            <BasketList
+              basket={basket}
+              totalPrice={totalPrice}
+              isBasketShow={isBasketShow}
+              handleBasketShow={handleBasketShow}
+              addItemToBasket={addItemToBasket}
+              removeFromBasket={removeFromBasket}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
