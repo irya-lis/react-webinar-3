@@ -4,7 +4,7 @@ import './style.css';
 import BasketList from "../basket-list";
 import {plural} from "../../utils";
 
-function Controls({basket, totalPrice, addItemToBasket, removeFromBasket}) {
+function Controls(props) {
   const [isBasketShow, setIsBasketShow] = useState(false);
 
   const handleBasketShow = () => {
@@ -23,7 +23,7 @@ function Controls({basket, totalPrice, addItemToBasket, removeFromBasket}) {
           one: 'товар',
           few: 'товара',
           many: 'товаров'
-        })} / ${totalPrice} ₽` : 'пусто'}
+        })} / ${props.totalPrice} ₽` : 'пусто'}
     </span>
     );
   }
@@ -31,7 +31,7 @@ function Controls({basket, totalPrice, addItemToBasket, removeFromBasket}) {
   return (
     <div className='Controls'>
     <span className="Controls-basket">
-      <span>{basketText(basket?.length)}</span>
+      <span>{basketText(props.basket?.length)}</span>
     </span>
       <button onClick={handleBasketShow}>Перейти</button>
 
@@ -40,12 +40,12 @@ function Controls({basket, totalPrice, addItemToBasket, removeFromBasket}) {
           <div className="Basket-overlay" onClick={handleBasketShow}/>
           <div className="Basket-show">
             <BasketList
-              basket={basket}
-              totalPrice={totalPrice}
+              basket={props.basket}
+              totalPrice={props.totalPrice}
               isBasketShow={isBasketShow}
               handleBasketShow={handleBasketShow}
-              addItemToBasket={addItemToBasket}
-              removeFromBasket={removeFromBasket}
+              addItemToBasket={props.addItemToBasket}
+              removeFromBasket={props.removeFromBasket}
             />
           </div>
         </>

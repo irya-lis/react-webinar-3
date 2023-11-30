@@ -4,34 +4,34 @@ import './style.css';
 import Head from "../head";
 import Item from "../item";
 
-const BasketList = ({basket = [], totalPrice, isBasketShow, handleBasketShow, addItemToBasket, removeFromBasket}) => {
+const BasketList = (props) => {
 
   return (
     <div className="Basket">
       <Head title="Корзина"/>
-      <button className="Basket-close" onClick={handleBasketShow}>
+      <button className="Basket-close" onClick={props.handleBasketShow}>
         Закрыть
       </button>
       <div>
         {
-          basket && basket.length ? (
-            basket.map(item => (
+          props.basket && props.basket.length ? (
+            props.basket.map(item => (
               <div key={item.code} className='List-item'>
                 <Item
                   key={item.code}
                   item={item}
                   quantity={item.quantity}
-                  isBasketShow={isBasketShow}
-                  addItemToBasket={addItemToBasket}
-                  removeFromBasket={removeFromBasket}
+                  isBasketShow={props.isBasketShow}
+                  addItemToBasket={props.addItemToBasket}
+                  removeFromBasket={props.removeFromBasket}
                 /></div>
             ))
           ) : <div className="Basket-empty">Корзина пуста</div>
         }
         {
-          basket.length > 0 &&
+          props.basket.length > 0 &&
           <div className="Basket-total-price">
-            Итого <span>{totalPrice} ₽</span>
+            Итого <span>{props.totalPrice} ₽</span>
           </div>
         }
       </div>

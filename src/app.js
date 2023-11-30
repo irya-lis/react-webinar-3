@@ -5,9 +5,9 @@ import Controls from "./components/controls";
 import List from "./components/list";
 
 function App({store}) {
-  const list = store.getState().list;
-  const basket = store.getState().basket;
-  const totalPrice = store.getState().totalPrice;
+  const list = store.getState().list || [];
+  const basket = store.getState().basket || [];
+  const totalPrice = store.getState().totalPrice || 0;
 
 
   const callbacks = {

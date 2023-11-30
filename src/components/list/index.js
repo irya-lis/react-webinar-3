@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import Item from "../item";
 import './style.css';
 
-function List({list = [], addItemToBasket}) {
+function List(props) {
 
-  if(!list.length) {
+  if(!props.list.length) {
     return <h3>Nothing here</h3>
   }
   return (
     <div className='List'>
       {
-      list.map(item =>
+        props.list.map(item =>
         <div key={item.code} className='List-item'>
-          <Item item={item} addItemToBasket={addItemToBasket} />
+          <Item item={item} addItemToBasket={props.addItemToBasket} />
         </div>
       )}
     </div>

@@ -2,30 +2,30 @@ import React from "react";
 import PropTypes from "prop-types";
 import './style.css';
 
-function Item({item, quantity, isBasketShow, addItemToBasket, removeFromBasket}) {
+function Item(props) {
 
   /**
    * Добавление или удаление товара из корзины в зависимости от флага isBasketShow
    */
   const handleActionClick = () => {
-    if (isBasketShow) {
-      removeFromBasket(item.code);
+    if (props.isBasketShow) {
+      props.removeFromBasket(props.item.code);
     } else {
-      addItemToBasket(item);
+      props.addItemToBasket(props.item);
     }
   };
 
   return (
     <div className='Item'>
-      <div className='Item-code'>{item.code}</div>
-      <div className='Item-title'>{item.title}</div>
-      <div className='Item-price'>{item.price} ₽</div>
-      {isBasketShow &&
-      <div className='Item-quantity'>{quantity} <span>шт</span></div>
+      <div className='Item-code'>{props.item.code}</div>
+      <div className='Item-title'>{props.item.title}</div>
+      <div className='Item-price'>{props.item.price} ₽</div>
+      {props.isBasketShow &&
+      <div className='Item-quantity'>{props.quantity} <span>шт</span></div>
       }
       <div className='Item-actions'>
         <button onClick={handleActionClick}>
-          {isBasketShow ? "Удалить" : "Добавить"}
+          {props.isBasketShow ? "Удалить" : "Добавить"}
         </button>
       </div>
     </div>
