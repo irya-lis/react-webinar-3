@@ -2,7 +2,6 @@
   font-size: 16px;
   font-family: Arial;
   text-align: left;
-
 }
 
 .Basket-list {
@@ -26,10 +25,8 @@
   font-size: 18px;
   font-weight: 700;
   padding: 20px 115px 20px 20px;
-
 }
 
 .Basket-total-price span {
   padding-left: 40px;
-
 }
