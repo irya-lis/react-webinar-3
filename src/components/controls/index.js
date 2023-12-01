@@ -33,7 +33,7 @@ function Controls(props) {
     <span className="Controls-basket">
       <span>{basketText(props.basket?.length)}</span>
     </span>
-      <button onClick={handleBasketShow}>Перейти</button>
+      <button className="Controls-button" onClick={handleBasketShow}>Перейти</button>
 
       {isBasketShow && (
         <>

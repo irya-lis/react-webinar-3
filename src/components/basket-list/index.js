@@ -8,10 +8,12 @@ const BasketList = (props) => {
 
   return (
     <div className="Basket">
-      <Head title="Корзина"/>
-      <button className="Basket-close" onClick={props.handleBasketShow}>
-        Закрыть
-      </button>
+      <div className="Basket-head">
+        <Head title="Корзина"/>
+        <button className="Basket-close" onClick={props.handleBasketShow}>
+          Закрыть
+        </button>
+      </div>
       <div>
         {
           props.basket && props.basket.length ? (
@@ -40,7 +42,7 @@ const BasketList = (props) => {
 }
 
 BasketList.propTypes = {
-  order: PropTypes.arrayOf(PropTypes.shape({
+  basket: PropTypes.arrayOf(PropTypes.shape({
     code: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
