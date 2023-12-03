@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './style.css';
 import Head from "../head";
 import Item from "../item";
+import {formatNumberWithCommas} from "../../utils";
 
 const BasketList = (props) => {
 
@@ -33,7 +34,7 @@ const BasketList = (props) => {
         {
           props.basket.length > 0 &&
           <div className="Basket-total-price">
-            Итого <span>{props.totalPrice} ₽</span>
+            Итого <span>{formatNumberWithCommas(props.totalPrice)} ₽</span>
           </div>
         }
       </div>

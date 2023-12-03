@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import './style.css';
 import BasketList from "../basket-list";
-import {plural} from "../../utils";
+import {formatNumberWithCommas, plural} from "../../utils";
 
 function Controls(props) {
   const [isBasketShow, setIsBasketShow] = useState(false);
@@ -23,7 +23,7 @@ function Controls(props) {
           one: 'товар',
           few: 'товара',
           many: 'товаров'
-        })} / ${props.totalPrice} ₽` : 'пусто'}
+        })} / ${formatNumberWithCommas(props.totalPrice)} ₽` : 'пусто'}
     </span>
     );
   }

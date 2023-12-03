@@ -1,3 +1,5 @@
+const CHAR_SEPARATOR = '';
+
 /**
  * Плюрализация
  * Возвращает вариант с учётом правил множественного числа под указанную локаль
@@ -14,6 +16,22 @@ export function plural(value, variants = {}, locale = 'ru-RU') {
   const key = new Intl.PluralRules(locale).select(value);
   // Возвращаем вариант по ключу, если он есть
   return variants[key] || '';
+}
+
+/**
+ * Форматирует число, разделяя разряды пробелами.
+ * @param {number} number - Число, которое нужно отформатировать.
+ * @returns {string} - Отформатированная строка числа с пробелами между разрядами.
+ */
+export function formatNumberWithCommas(number) {
+  const reversedArray = number.toString().split(CHAR_SEPARATOR).reverse();
+
+  const formattedNumber = reversedArray
+    .reduce((result, digit, index) => {
+      return (index !== 0 && index % 3 === 0) ? result + ' ' + digit : result + digit;
+    }, '');
+
+  return formattedNumber.split(CHAR_SEPARATOR).reverse().join(CHAR_SEPARATOR);
 }
 
 /**
