@@ -1,15 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
-import BasketList from "../basket-list";
 import {formatNumberWithCommas, plural} from "../../utils";
 
 function Controls(props) {
-  const [isBasketShow, setIsBasketShow] = useState(false);
-
-  const handleBasketShow = () => {
-    setIsBasketShow(!isBasketShow);
-  }
 
   /**
    * Отображение уникальных товаров с плюрализацией в корзине и их общей стоимости, иначе - 'пусто'
@@ -33,23 +27,7 @@ function Controls(props) {
     <span className="Controls-basket">
       <span>{basketText(props.basket?.length)}</span>
     </span>
-      <button className="Controls-button" onClick={handleBasketShow}>Перейти</button>
-
-      {isBasketShow && (
-        <>
-          <div className="Basket-overlay" onClick={handleBasketShow}/>
-          <div className="Basket-show">
-            <BasketList
-              basket={props.basket}
-              totalPrice={props.totalPrice}
-              isBasketShow={isBasketShow}
-              handleBasketShow={handleBasketShow}
-              addItemToBasket={props.addItemToBasket}
-              removeFromBasket={props.removeFromBasket}
-            />
-          </div>
-        </>
-      )}
+      <button className="Controls-button" onClick={props.handleBasketShow}>Перейти</button>
     </div>
   );
 }
@@ -57,10 +35,10 @@ function Controls(props) {
 Controls.propTypes = {
   basket: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      quantity: PropTypes.number.isRequired,
+      id: PropTypes.number,
+      name: PropTypes.string,
+      price: PropTypes.number,
+      quantity: PropTypes.number,
     })
   ),
   totalPrice: PropTypes.number.isRequired,

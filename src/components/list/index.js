@@ -2,22 +2,24 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Item from "../item";
 import './style.css';
+import AddToBasketButton from "../add-to-basket-button";
 
 function List(props) {
-
-  if(!props.list.length) {
-    return <h3>Nothing here</h3>
+  if (!props.list.length) {
+    return <h3>Nothing here</h3>;
   }
+
   return (
     <div className='List'>
-      {
-        props.list.map(item =>
+      {props.list.map(item => (
         <div key={item.code} className='List-item'>
-          <Item item={item} addItemToBasket={props.addItemToBasket} />
+          <Item item={item}>
+            <AddToBasketButton onClick={() => props.addItemToBasket(item)}/>
+          </Item>
         </div>
-      )}
+      ))}
     </div>
-  )
+  );
 }
 
 List.propTypes = {
@@ -31,7 +33,7 @@ List.propTypes = {
 
 List.defaultProps = {
   addItemToBasket: () => {
-  }
-}
+  },
+};
 
 export default React.memo(List);

@@ -4,9 +4,9 @@ import './style.css';
 import Head from "../head";
 import Item from "../item";
 import {formatNumberWithCommas} from "../../utils";
+import RemoveFromBasketButton from "../remove-from-basket-button";
 
 const BasketList = (props) => {
-
   return (
     <div className="Basket">
       <div className="Basket-head">
@@ -16,27 +16,27 @@ const BasketList = (props) => {
         </button>
       </div>
       <div>
-        {
-          props.basket && props.basket.length ? (
-            props.basket.map(item => (
-              <div key={item.code} className='List-item'>
-                <Item
-                  key={item.code}
-                  item={item}
-                  quantity={item.quantity}
-                  isBasketShow={props.isBasketShow}
-                  addItemToBasket={props.addItemToBasket}
-                  removeFromBasket={props.removeFromBasket}
-                /></div>
-            ))
-          ) : <div className="Basket-empty">Корзина пуста</div>
-        }
-        {
-          props.basket.length > 0 &&
+        {props.basket && props.basket.length ? (
+          props.basket.map(item => (
+            <div key={item.code} className='List-item'>
+              <Item
+                key={item.code}
+                item={item}
+                quantity={item.quantity}
+                isBasketShow={props.isBasketShow}
+              >
+                <RemoveFromBasketButton onClick={() => props.removeFromBasket(item.code)}/>
+              </Item>
+            </div>
+          ))
+        ) : (
+          <div className="Basket-empty">Корзина пуста</div>
+        )}
+        {props.basket.length > 0 && (
           <div className="Basket-total-price">
             Итого <span>{formatNumberWithCommas(props.totalPrice)} ₽</span>
           </div>
-        }
+        )}
       </div>
     </div>
   );
@@ -51,6 +51,8 @@ BasketList.propTypes = {
   })).isRequired,
   handleBasketShow: PropTypes.func.isRequired,
   removeFromBasket: PropTypes.func.isRequired,
+  isBasketShow: PropTypes.bool.isRequired,
+  totalPrice: PropTypes.number.isRequired,
 };
 
 export default React.memo(BasketList);
