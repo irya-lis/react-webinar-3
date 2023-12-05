@@ -1,3 +1,4 @@
+import React from "react";
 import {memo} from "react";
 import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
@@ -10,7 +11,7 @@ function BasketTotal({sum}) {
     <div className={cn()}>
       <span className={cn('cell')}>Итого</span>
       <span className={cn('cell')}> {numberFormat(sum)} ₽</span>
-      <span className={cn('cell')}></span>
+      <span className={cn('cell')}> </span>
     </div>
   );
 }
