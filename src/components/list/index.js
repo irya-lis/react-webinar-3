@@ -1,6 +1,6 @@
+import React from 'react';
 import {memo} from "react";
 import PropTypes from 'prop-types';
-import Item from "../item";
 import './style.css';
 
 function List({list, renderItem}) {
@@ -10,7 +10,9 @@ function List({list, renderItem}) {
         <div key={item._id} className='List-item'>
           {renderItem(item)}
         </div>
+
       )}
+
     </div>
   )
 }

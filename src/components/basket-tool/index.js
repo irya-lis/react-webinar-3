@@ -1,13 +1,14 @@
-import {memo} from "react";
+import React, { memo } from "react";
 import PropTypes from 'prop-types';
-import {cn as bem} from '@bem-react/classname';
-import {numberFormat, plural} from "../../utils";
+import { cn as bem } from '@bem-react/classname';
+import { numberFormat, plural } from "../../utils";
 import './style.css';
 
-function BasketTool({sum, amount, onOpen}) {
+function BasketTool({ sum, amount, onOpen }) {
   const cn = bem('BasketTool');
   return (
     <div className={cn()}>
+
       <span className={cn('label')}>В корзине:</span>
       <span className={cn('total')}>
         {amount
