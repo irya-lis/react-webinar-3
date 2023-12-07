@@ -10,9 +10,7 @@ function List({list, renderItem}) {
         <div key={item._id} className='List-item'>
           {renderItem(item)}
         </div>
-
       )}
-
     </div>
   )
 }
