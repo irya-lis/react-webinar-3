@@ -1,21 +1,24 @@
-import {memo, useState} from "react";
+import React from 'react';
+import {memo} from "react";
 import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat} from "../../utils";
 import './style.css';
+import {useNavigate} from "react-router";
 
 function Item(props) {
+  const navigate = useNavigate();
 
   const cn = bem('Item');
-
   const callbacks = {
     onAdd: (e) => props.onAdd(props.item._id)
   }
 
   return (
     <div className={cn()}>
-      {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')}>
+      <div className={cn('title')} onClick={() => {
+        navigate(`/${props.item._id}`)
+      }}>
         {props.item.title}
       </div>
       <div className={cn('actions')}>
@@ -36,7 +39,8 @@ Item.propTypes = {
 };
 
 Item.defaultProps = {
-  onAdd: () => {},
+  onAdd: () => {
+  },
 }
 
 export default memo(Item);

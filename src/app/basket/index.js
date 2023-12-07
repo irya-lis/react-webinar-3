@@ -1,4 +1,4 @@
-import {memo, useCallback} from 'react';
+import React, {memo, useCallback} from 'react';
 import ItemBasket from "../../components/item-basket";
 import List from "../../components/list";
 import ModalLayout from "../../components/modal-layout";
@@ -9,7 +9,6 @@ import useSelector from "../../store/use-selector";
 function Basket() {
 
   const store = useStore();
-
   const select = useSelector(state => ({
     list: state.basket.list,
     amount: state.basket.amount,
