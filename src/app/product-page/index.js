@@ -1,31 +1,39 @@
-import React, { memo, useCallback, useEffect } from 'react';
-import {useParams} from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import useStore from '../../store/use-store';
-import useSelector from '../../store/use-selector';
 import ProductDescription from '../../components/product-description';
-
+import LoadingIndicator from '../../components/loading-indicator'; // Импортируйте компонент
 
 function ProductPage() {
-
   const store = useStore();
-  const {id}= useParams();
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    store.actions.product.getProduct(id);
-  }, [id]);
+    const fetchProduct = async () => {
+      try {
+        const productData = await store.actions.product.getProduct(id);
+        setProduct(productData);
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [store, id]);
 
 
-  const state = useSelector((state)=> state.product)
-  const callbacks = {
-    addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store, id]),
-
-  }
 
   return (
-    <>
-        {state && <ProductDescription product={state} onAdd={callbacks.addToBasket}/>}
-    </>
+    <div>
+      {loading ?
+        <LoadingIndicator /> :
+        <ProductDescription product={product} onAdd={(_id) => store.actions.basket.addToBasket(_id)} />}
+    </div>
   );
 }
 
-export default memo(ProductPage);
+export default ProductPage;

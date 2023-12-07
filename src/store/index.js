@@ -14,6 +14,7 @@ class Store {
      * modals: Modals,
      * product: Product,
      * }} */
+
     this.actions = {};
     for (const name of Object.keys(modules)) {
       this.actions[name] = new modules[name](this, name);

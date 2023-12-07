@@ -1,61 +1,106 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo} from "react";
 import PropTypes from "prop-types";
-import './style.css';
+import {cn as bem} from "@bem-react/classname";
+import "./style.css";
 
-function Pagination({ limit, skip, total, onPageChange }) {
-  const totalPages = Math.ceil(total / limit);
-
-  const getPageNumbers = () => {
-    const pageNumbers = [];
-    const currentPage = Math.floor(skip / limit) + 1;
-    const maxVisiblePages = 3;
-
-
-    for (let i = 1; i <= totalPages; i++) {
-      if (
-        i === 1 ||
-        i === totalPages ||
-        (i >= currentPage - maxVisiblePages && i <= currentPage + maxVisiblePages)
-      ) {
-        pageNumbers.push(i);
-      } else if (
-        i === currentPage - maxVisiblePages - 1 ||
-        i === currentPage + maxVisiblePages + 1
-      ) {
-        pageNumbers.push('...');
-      }
-    }
-
-    return pageNumbers;
-  };
-
-  const handlePageChange = useCallback((newPage) => {
-    const newSkip = (newPage - 1) * limit;
-    onPageChange(newSkip);
-  }, [limit, onPageChange]);
-
-  return (
-    <div className="pagination-container">
-      {getPageNumbers().map((pageNumber, index) => (
-        <button
-          key={index}
-          onClick={() => (typeof pageNumber === 'number' ? handlePageChange(pageNumber) : null)}
-          className={`pagination-button ${typeof pageNumber === 'number' && pageNumber === Math.floor(skip / limit) + 1 ? 'active' : ''}`}
+function Pagination({activePage, setActivePage, count}) {
+  const cn = bem("Pagination");
+  if (activePage === 1) {
+    return (
+      <div className={cn()}>
+        <div className={cn("number", {active: "true"})}>{activePage}</div>
+        <div
+          className={cn("number")}
+          onClick={() => setActivePage((activePage) => activePage + 1)}
         >
-          {typeof pageNumber === 'number' ? pageNumber : <span className="pagination-ellipsis">...</span>}
-        </button>
+          {activePage + 1}
+        </div>
+        <div
+          className={cn("number")}
+          onClick={() => setActivePage((activePage) => activePage + 2)}
+        >
+          {activePage + 2}
+        </div>
+        <div className={cn("points")}>...</div>
+        <div className={cn("number")} onClick={() => setActivePage(count)}>
+          {count}
+        </div>
+      </div>
+    );
+  }
+  if (activePage === count) {
+    return (
+      <div className={cn()}>
+        <div className={cn("number")} onClick={() => setActivePage(1)}>
+          1
+        </div>
+        <div className={cn("points")}>...</div>
+        <div
+          className={cn("number")}
+          onClick={() => setActivePage((activePage) => activePage - 2)}
+        >
+          {activePage - 2}
+        </div>
+        <div
+          className={cn("number")}
+          onClick={() => setActivePage((activePage) => activePage - 1)}
+        >
+          {activePage - 1}
+        </div>
 
-
-      ))}
+        <div
+          className={cn("number", {active: "true"})} onClick={() => setActivePage(count)}
+        >
+          {count}
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className={cn()}>
+      {activePage > 2 && (
+        <div className={cn("number")} onClick={() => setActivePage(1)}>
+          1
+        </div>
+      )}
+      {activePage > 3 && (
+        <div className={cn("points")}>...</div>
+      )}
+      <div
+        className={cn("number")}
+        onClick={() => setActivePage((activePage) => activePage - 1)}
+      >
+        {activePage - 1}
+      </div>
+      <div className={cn("number", {active: "true"})}>{activePage}</div>
+      <div
+        className={cn("number")}
+        onClick={() => setActivePage((activePage) => activePage + 1)}
+      >
+        {activePage + 1}
+      </div>
+      {activePage < count - 2 && (
+        <div className={cn("points")}>...</div>
+      )}
+      {activePage < count - 1 && (
+        <div className={cn("number")} onClick={() => setActivePage(count)}>
+          {count}
+        </div>
+      )}
     </div>
   );
 }
 
 Pagination.propTypes = {
-  limit: PropTypes.number.isRequired,
-  skip: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
+  activePage: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
+  setActivePage: PropTypes.func.isRequired,
+};
+
+Pagination.defaultProps = {
+  setActivePage: () => {
+  },
+  activePage: 1,
 };
 
 export default memo(Pagination);

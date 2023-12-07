@@ -1,18 +1,20 @@
-.Product-description {
+.Product-description-head {
   display: flex;
   flex-direction: column;
-  padding: 0 40px;
-  color: #000;
-  font-family: Arial;
-  font-size: 18px;
   font-style: normal;
+  font-size: 16px;
   font-weight: 400;
-  line-height: normal;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left: 40px;
+  margin-right: 40px;
+  line-height: 21px;
 }
 
 .Product-description-description {
   margin-top: 20px;
 }
+
 .Product-description-made-in {
   margin-top: 20px;
 }
@@ -31,13 +33,16 @@
   font-weight: 700;
   font-size: 24px;
 }
+
 .Product-description-button {
   margin-top: 20px;
   width: 76px;
   height: 21px;
   border-radius: 2px;
-  border: 1px solid #767676;
-  background: #efefef;
-  text-align: center;
+  border: 1px solid #676666;
   font-size: 13px;
+}
+
+.Product-description-button:active {
+ background-color: #d4d4d4;
 }

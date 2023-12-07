@@ -7,47 +7,50 @@ import PageLayout from "../page-layout";
 import BasketTool from "../basket-tool";
 
 function ProductDescription(props) {
-  debugger;
   const cn = bem("Product-description");
-
-  const callbacks = {
-    onAdd: (e) => props.onAdd(props.item._id)
-  }
+  const { title, description, madeIn, category, edition } = props.product;
 
   if (!props.product) {
-    return <div>Loading...</div>
+    return null;
   }
 
-  const {title, description, madeIn: {title: titleMadeIn, code}, category: {title: titleCategory}, edition, price} = props.product;
+  const { title: titleMadeIn, code } = madeIn || {};
+  const { title: titleCategory } = category || {};
+  const { price } = props.product;
+
+  const handleAddToBasket = () => {
+    props.onAdd(props.product._id);
+  };
 
   return (
     <>
-      < PageLayout>
-        <Head title={title}/>
-        <BasketTool/>
+      <PageLayout className={cn}>
+        <Head title={title} />
+        <BasketTool />
 
-        <span className={cn("description")}>
-        {description}
-      </span>
-        <span className={cn("made-in")}>
-        Страна производитель: <b>{titleMadeIn}</b> <b>{code}</b>
-      </span>
-        <span className={cn("category")}>
-        Категория: <b>{titleCategory}</b>
-      </span>
-        <span className={cn("edition")}>
-        Год выпуска: <b>{edition}</b>
-      </span>
-        <span className={cn("price")}>
-        Цена: <b>{price} ₽</b>
-      </span>
-        <button className={cn("button")} onClick={callbacks.onAdd}>
-          Добавить
-        </button>
-      </ PageLayout>
+        <div className={cn("head")}>
+          <div className={cn("description")}>{description}</div>
+          <div className={cn("made-in")}>
+            Страна производитель: <b>{titleMadeIn}</b> <b>({code})</b>
+          </div>
+          <div className={cn("category")}>
+            Категория: <b>{titleCategory}</b>
+          </div>
+          <div className={cn("edition")}>
+            Год выпуска: <b>{edition}</b>
+          </div>
+          <div className={cn("price")}>
+            Цена: <b>{price} ₽</b>
+          </div>
+          <button className={cn("button")} onClick={handleAddToBasket}>
+            Добавить
+          </button>
+        </div>
+      </PageLayout>
     </>
   );
 }
+
 
 export default memo(ProductDescription);
 
