@@ -25,8 +25,6 @@ function ProductPage() {
     fetchProduct();
   }, [store, id]);
 
-
-
   return (
     <div>
       {loading ?

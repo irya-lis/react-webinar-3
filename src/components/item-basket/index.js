@@ -20,7 +20,10 @@ function ItemBasket(props) {
   return (
     <div className={cn()}>
       <div className={cn("title")}
-           onClick={() => {navigate(`/${props.item._id}`); callbacks.closeModal()}}>
+           onClick={() => {
+             navigate(`/${props.item._id}`);
+             callbacks.closeModal()
+           }}>
         {props.item.title}
       </div>
       <div className={cn('right')}>
@@ -45,7 +48,8 @@ ItemBasket.propTypes = {
 }
 
 ItemBasket.defaultProps = {
-  onRemove: () => {},
+  onRemove: () => {
+  },
 }
 
 export default memo(ItemBasket);

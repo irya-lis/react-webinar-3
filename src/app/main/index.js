@@ -13,18 +13,15 @@ function Main() {
   const store = useStore();
   const [activePage, setActivePage] = useState(1);
 
-
   useEffect(() => {
     store.actions.catalog.load(activePage);
   }, [activePage]);
-
 
   const select = useSelector(state => ({
     list: state.catalog.list,
     amount: state.basket.amount,
     sum: state.basket.sum,
     count: state.catalog.count,
-
   }));
 
   const callbacks = {
@@ -47,7 +44,6 @@ function Main() {
       <List list={select.list} renderItem={renders.item}/>
       <Pagination activePage={activePage} setActivePage={setActivePage} count={select.count}/>
     </PageLayout>
-
   );
 }
 
