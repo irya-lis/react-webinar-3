@@ -1,42 +1,50 @@
 import React, {memo} from "react";
-import {cn as bem} from "@bem-react/classname";
+import {cn as bem} from '@bem-react/classname';
 import "./style.css";
 import PropTypes from 'prop-types';
 import Head from "../head";
-import {NavLink} from "react-router-dom";
+import PageLayout from "../page-layout";
+import BasketTool from "../basket-tool";
 
 function ProductDescription(props) {
+  debugger;
   const cn = bem("Product-description");
 
-  if(!props.data) {
+  const callbacks = {
+    onAdd: (e) => props.onAdd(props.item._id)
+  }
+
+  if (!props.product) {
     return <div>Loading...</div>
   }
 
+  const {title, description, madeIn: {title: titleMadeIn, code}, category: {title: titleCategory}, edition, price} = props.product;
+
   return (
     <>
-      <Head title={props.data.title}/>
-      <NavLink to="/" className={cn("link")}>
-        Главная
-      </NavLink>
-      <span className={cn("description")}>
-        {props.data.description}
+      < PageLayout>
+        <Head title={title}/>
+        <BasketTool/>
+
+        <span className={cn("description")}>
+        {description}
       </span>
-      <span className={cn("made-in")}>
-       Страна производитель:  <b>{props.data.madeIn}</b>
+        <span className={cn("made-in")}>
+        Страна производитель: <b>{titleMadeIn}</b> <b>{code}</b>
       </span>
-      <span className={cn("category")}>
-        Категория: <b>{props.data.category}</b>
+        <span className={cn("category")}>
+        Категория: <b>{titleCategory}</b>
       </span>
-      <span className={cn("edition")}>
-        Год выпуска: <b>{props.data.edition}</b>
+        <span className={cn("edition")}>
+        Год выпуска: <b>{edition}</b>
       </span>
-      <span className={cn("price")}>
-        Цена: <b>{props.data.price} ₽</b>
+        <span className={cn("price")}>
+        Цена: <b>{price} ₽</b>
       </span>
-      <button className={cn("button")}
-        onClick={() => props.addToBasket(props._id)}>
-        Добавить
-      </button>
+        <button className={cn("button")} onClick={callbacks.onAdd}>
+          Добавить
+        </button>
+      </ PageLayout>
     </>
   );
 }
@@ -44,19 +52,18 @@ function ProductDescription(props) {
 export default memo(ProductDescription);
 
 ProductDescription.propTypes = {
-  data: PropTypes.shape({
-    description: PropTypes.string,
-    title: PropTypes.string,
-    madeIn: PropTypes.string,
-    category: PropTypes.string,
-    edition: PropTypes.number,
-    price: PropTypes.number,
-  }).isRequired,
-  addToBasket: PropTypes.func,
-  _id: PropTypes.string,
+  product: PropTypes.shape({
+    description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    madeIn: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      code: PropTypes.string.isRequired,
+    }).isRequired,
+    category: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+    }).isRequired,
+    edition: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+  }),
+  onAdd: PropTypes.func,
 };
-
-ProductDescription.defaultProps = {
-  addToBasket: () => {},
-};
-

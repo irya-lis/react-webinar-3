@@ -13,7 +13,9 @@ function Main() {
 
   useEffect(() => {
     store.actions.catalog.load();
+
   }, []);
+
 
   const select = useSelector(state => ({
     list: state.catalog.list,

@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React from 'react';
 import Main from "./main";
 import Basket from "./basket";
 import useSelector from "../store/use-selector";
@@ -17,7 +17,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main/>}/>
-        <Route path="/:itemId" element={<ProductPage/>}/>
+        <Route path="/:id" element={<ProductPage/>}/>
         <Route path="*" element={<div>Not found</div>} />
       </Routes>
       {activeModal === 'basket' && <Basket/>}
