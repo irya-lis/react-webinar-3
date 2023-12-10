@@ -1,0 +1,21 @@
+.Main-menu-main-page {
+  text-align: left;
+  font-size: 18px;
+  list-style-type: none;
+  margin: -20px;
+}
+
+.Main-menu-main-page a {
+  color: rgb(0, 135, 233);
+  transition: color 0.1s ease;
+}
+
+.Main-menu-main-page a:active {
+  color: gray;
+}
+
+
+
+
+
+

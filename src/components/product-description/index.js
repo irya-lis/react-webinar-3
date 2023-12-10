@@ -4,7 +4,7 @@ import "./style.css";
 import PropTypes from 'prop-types';
 import Head from "../head";
 import PageLayout from "../page-layout";
-import BasketTool from "../basket-tool";
+import ContentInformation from "../../app/content-information";
 
 function ProductDescription(props) {
   const cn = bem("Product-description");
@@ -26,8 +26,7 @@ function ProductDescription(props) {
     <>
       <PageLayout className={cn}>
         <Head title={title} />
-        <BasketTool />
-
+        <ContentInformation/>
         <div className={cn("head")}>
           <div className={cn("description")}>{description}</div>
           <div className={cn("made-in")}>

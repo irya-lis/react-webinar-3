@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useStore from '../../store/use-store';
 import ProductDescription from '../../components/product-description';
-import LoadingIndicator from '../../components/loading-indicator'; // Импортируйте компонент
+import LoadingIndicator from '../../components/loading-indicator';
 
 function ProductPage() {
   const store = useStore();
@@ -21,7 +21,6 @@ function ProductPage() {
         setLoading(false);
       }
     };
-
     fetchProduct();
   }, [store, id]);
 
