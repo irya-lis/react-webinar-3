@@ -4,7 +4,7 @@ import "./style.css";
 import PropTypes from 'prop-types';
 import Head from "../head";
 import PageLayout from "../page-layout";
-import ContentInformation from "../../app/content-information";
+import ContentInformation from "../content-information";
 
 function ProductDescription(props) {
   const cn = bem("Product-description");

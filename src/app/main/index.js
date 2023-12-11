@@ -6,7 +6,7 @@ import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from "../../components/pagination";
-import ContentInformation from "../content-information";
+import ContentInformation from "../../components/content-information";
 
 function Main() {
 
