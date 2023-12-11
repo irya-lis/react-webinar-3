@@ -9,8 +9,7 @@ function MainMenu() {
     <nav>
       <ul>
         <li className={cn("main-page")}>
-          <Link to="/" className={cn('main-page-link')}> Главная
-          </Link>
+          <Link to="/" className={cn('main-page-link')}> Главная</Link>
         </li>
       </ul>
     </nav>

@@ -8,14 +8,14 @@ import ContentInformation from "../../app/content-information";
 
 function ProductDescription(props) {
   const cn = bem("Product-description");
-  const { title, description, madeIn, category, edition, price } = props.product;
+  const {title, description, madeIn, category, edition, price} = props.product;
 
   if (!props.product) {
     return null;
   }
 
-  const { title: titleMadeIn, code } = madeIn || {};
-  const { title: titleCategory } = category || {};
+  const {title: titleMadeIn, code} = madeIn || {};
+  const {title: titleCategory} = category || {};
 
   const handleAddToBasket = () => {
     props.onAdd(props.product._id);
@@ -24,7 +24,7 @@ function ProductDescription(props) {
   return (
     <>
       <PageLayout className={cn}>
-        <Head title={title} />
+        <Head title={title}/>
         <ContentInformation/>
         <div className={cn("head")}>
           <div className={cn("description")}>{description}</div>
@@ -48,7 +48,6 @@ function ProductDescription(props) {
     </>
   );
 }
-
 
 export default memo(ProductDescription);
 
