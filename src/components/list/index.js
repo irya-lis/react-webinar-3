@@ -5,12 +5,12 @@ import './style.css';
 
 function List({list, renderItem}) {
   return (
-    <div className='List'>{
-      list.map(item =>
-        <div key={item._id} className='List-item'>
+    <div className='List'>
+      {list.map((item, index) => (
+        <div key={item._id || index} className='List-item'>
           {renderItem(item)}
         </div>
-      )}
+      ))}
     </div>
   )
 }

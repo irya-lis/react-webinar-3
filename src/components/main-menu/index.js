@@ -1,6 +1,7 @@
 import React, {memo} from 'react';
 import {cn as bem} from "@bem-react/classname";
 import './style.css';
+import {Link} from "react-router-dom";
 
 function MainMenu() {
   const cn = bem("Main-menu");
@@ -8,7 +9,8 @@ function MainMenu() {
     <nav>
       <ul>
         <li className={cn("main-page")}>
-          <a href="/" className={cn("main-page-link")}>Главная</a>
+          <Link to="/" className={cn('main-page-link')}> Главная
+          </Link>
         </li>
       </ul>
     </nav>
