@@ -12,13 +12,12 @@ import ProductPage from "./product-page";
 function App() {
 
   const activeModal = useSelector(state => state.modals.name);
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/:id" element={<ProductPage />} />
-        <Route path="*" element={<div>Not found</div>} />
+        <Route path="/" element={<Main/>}/>
+        <Route path="/:id" element={<ProductPage/>}/>
+        <Route path="*" element={<div>Not found</div>}/>
       </Routes>
       {activeModal === 'basket' && <Basket/>}
     </BrowserRouter>

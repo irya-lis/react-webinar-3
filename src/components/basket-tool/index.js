@@ -2,12 +2,11 @@ import React, {memo, useCallback} from "react";
 import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat, plural} from "../../utils";
-import {NavLink} from "react-router-dom";
 import './style.css';
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 
-function BasketTool({sum, amount}) {
+function BasketTool() {
   const store = useStore();
 
   const select = useSelector(state => ({
@@ -24,7 +23,6 @@ function BasketTool({sum, amount}) {
 
   return (
     <div className={cn()}>
-      <NavLink to='/' className={cn('link')}>Главная</NavLink>
       <div>
         <span className={cn('label')}>В корзине:</span>
         <span className={cn('total')}>

@@ -5,12 +5,6 @@
   font-size: 18px;
 }
 
-.BasketTool-link {
-  color: rgb(0, 135, 233);
-  text-align: left;
-  margin-right: auto;
-}
-
 .BasketTool-link:active {
   color: rgb(86, 107, 119);
 }

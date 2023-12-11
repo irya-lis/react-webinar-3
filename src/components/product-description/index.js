@@ -4,19 +4,18 @@ import "./style.css";
 import PropTypes from 'prop-types';
 import Head from "../head";
 import PageLayout from "../page-layout";
-import BasketTool from "../basket-tool";
+import ContentInformation from "../../app/content-information";
 
 function ProductDescription(props) {
   const cn = bem("Product-description");
-  const { title, description, madeIn, category, edition } = props.product;
+  const {title, description, madeIn, category, edition, price} = props.product;
 
   if (!props.product) {
     return null;
   }
 
-  const { title: titleMadeIn, code } = madeIn || {};
-  const { title: titleCategory } = category || {};
-  const { price } = props.product;
+  const {title: titleMadeIn, code} = madeIn || {};
+  const {title: titleCategory} = category || {};
 
   const handleAddToBasket = () => {
     props.onAdd(props.product._id);
@@ -25,9 +24,8 @@ function ProductDescription(props) {
   return (
     <>
       <PageLayout className={cn}>
-        <Head title={title} />
-        <BasketTool />
-
+        <Head title={title}/>
+        <ContentInformation/>
         <div className={cn("head")}>
           <div className={cn("description")}>{description}</div>
           <div className={cn("made-in")}>
@@ -50,7 +48,6 @@ function ProductDescription(props) {
     </>
   );
 }
-
 
 export default memo(ProductDescription);
 
