@@ -8,7 +8,7 @@ import ContentInformation from "../../app/content-information";
 
 function ProductDescription(props) {
   const cn = bem("Product-description");
-  const { title, description, madeIn, category, edition } = props.product;
+  const { title, description, madeIn, category, edition, price } = props.product;
 
   if (!props.product) {
     return null;
@@ -16,7 +16,6 @@ function ProductDescription(props) {
 
   const { title: titleMadeIn, code } = madeIn || {};
   const { title: titleCategory } = category || {};
-  const { price } = props.product;
 
   const handleAddToBasket = () => {
     props.onAdd(props.product._id);

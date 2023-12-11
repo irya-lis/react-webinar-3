@@ -19,13 +19,12 @@ class Basket extends StoreModule {
     let exist = false;
     const list = this.getState().list.map(item => {
       let result = item;
-      if (item._id === _id) {
+      if (item.result._id === _id) {
         exist = true;
         result = { ...item, amount: item.amount + 1 };
       }
 
       sum += result.result.price * result.amount;
-
       return result;
     });
 

@@ -6,7 +6,7 @@ import LoadingIndicator from '../../components/loading-indicator';
 
 function ProductPage() {
   const store = useStore();
-  const { id } = useParams();
+  const {id} = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 

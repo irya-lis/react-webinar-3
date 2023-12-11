@@ -12,7 +12,6 @@ import ProductPage from "./product-page";
 function App() {
 
   const activeModal = useSelector(state => state.modals.name);
-
   return (
     <BrowserRouter>
       <Routes>
